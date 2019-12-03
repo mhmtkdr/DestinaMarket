@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DestinaMarket.Database
 {
-    public class DMContext : DbContext
+    public class DMContext : DbContext, IDisposable
     {
         public DMContext() : base("DestinaMarketConnection")
         {
-
+            
         }
 
         public DbSet<Category> Categories { get; set; }

@@ -3,7 +3,7 @@ namespace DestinaMarket.Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialized : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {

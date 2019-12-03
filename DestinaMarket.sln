@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DestinaMarket.Entities", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DestinaMarket.Database", "DestinaMarket.Database\DestinaMarket.Database.csproj", "{A96A7EFA-775C-41DC-B152-450565188E24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DestinaMarket.Services", "DestinaMarket.Services\DestinaMarket.Services.csproj", "{66D65602-ACFB-481A-8BF7-88CC9C01020D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A96A7EFA-775C-41DC-B152-450565188E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A96A7EFA-775C-41DC-B152-450565188E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A96A7EFA-775C-41DC-B152-450565188E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66D65602-ACFB-481A-8BF7-88CC9C01020D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D65602-ACFB-481A-8BF7-88CC9C01020D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D65602-ACFB-481A-8BF7-88CC9C01020D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D65602-ACFB-481A-8BF7-88CC9C01020D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

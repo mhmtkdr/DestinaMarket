@@ -4,16 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A96A7EFA-775C-41DC-B152-450565188E24}</ProjectGuid>
+    <ProjectGuid>{66D65602-ACFB-481A-8BF7-88CC9C01020D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DestinaMarket.Database</RootNamespace>
-    <AssemblyName>DestinaMarket.Database</AssemblyName>
+    <RootNamespace>DestinaMarket.Services</RootNamespace>
+    <AssemblyName>DestinaMarket.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,28 +48,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMContext.cs" />
-    <Compile Include="Migrations\201912021346036_initial.cs" />
-    <Compile Include="Migrations\201912021346036_initial.Designer.cs">
-      <DependentUpon>201912021346036_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="CategoriesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\DestinaMarket.Database\DestinaMarket.Database.csproj">
+      <Project>{a96a7efa-775c-41dc-b152-450565188e24}</Project>
+      <Name>DestinaMarket.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DestinaMarket.Entities\DestinaMarket.Entities.csproj">
-      <Project>{32c49971-a070-4888-83b4-1c2164d71b8f}</Project>
+      <Project>{32C49971-A070-4888-83B4-1C2164D71B8F}</Project>
       <Name>DestinaMarket.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912021346036_initial.resx">
-      <DependentUpon>201912021346036_initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
