@@ -17,17 +17,22 @@ namespace DestinaMarket.Web.Controllers
             return View();
         }
 
-        public ActionResult ProductTable()
-        {
+        public ActionResult ProductTable(string search)
+       {
             var products = productService.GetProducts();
 
-            return View(products);
+            if (string.IsNullOrEmpty(search) == false)
+            {
+                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
+            }
+
+            return PartialView(products);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
