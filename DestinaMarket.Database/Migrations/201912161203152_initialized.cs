@@ -3,36 +3,37 @@ namespace DestinaMarket.Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class initialized : DbMigration
     {
         public override void Up()
         {
             CreateTable(
                 "dbo.Categories",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    ImageURL = c.String(),
+                    Name = c.String(),
+                    Description = c.String(),
+                })
                 .PrimaryKey(t => t.ID);
-            
+
             CreateTable(
                 "dbo.Products",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Price = c.Double(nullable: false),
-                        Name = c.String(),
-                        Description = c.String(),
-                        Category_ID = c.Int(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    Price = c.Double(nullable: false),
+                    Name = c.String(),
+                    Description = c.String(),
+                    Category_ID = c.Int(),
+                })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Categories", t => t.Category_ID)
                 .Index(t => t.Category_ID);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Products", "Category_ID", "dbo.Categories");
