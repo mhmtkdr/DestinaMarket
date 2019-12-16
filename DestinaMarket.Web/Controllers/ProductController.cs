@@ -1,5 +1,6 @@
 ﻿using DestinaMarket.Entities;
 using DestinaMarket.Services;
+using DestinaMarket.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +33,27 @@ namespace DestinaMarket.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return PartialView();
+            CategoriesService categoryService = new CategoriesService();
+
+            var categories = categoryService.GetCategories();
+
+            return PartialView(categories);
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(NewCategoryViewModel model)
         {
-            productService.SaveProduct(product);
+
+            CategoriesService categoryService = new CategoriesService();
+            
+            var newProduct = new Product();
+            newProduct.Name = model.Name;
+            newProduct.Description = model.Description;
+            newProduct.Price = model.Price;
+            newProduct.Category = categoryService.GetCategory(model.CategoryID);
+
+            productService.SaveProduct(newProduct);
+
             return RedirectToAction("ProductTable");
         }
 

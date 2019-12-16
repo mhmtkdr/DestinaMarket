@@ -10,7 +10,7 @@ namespace DestinaMarket.Database
 {
     public class DMContext : DbContext, IDisposable
     {
-        public DMContext() : base("DestinaMarketConnection")
+        public DMContext() : base("DestinaMarket")
         {
             
         }

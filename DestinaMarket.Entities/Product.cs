@@ -10,7 +10,7 @@ namespace DestinaMarket.Entities
     {
         public double Price { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         
     }
 }
