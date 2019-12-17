@@ -30,7 +30,7 @@ namespace DestinaMarket.Web.Controllers
 
             if (model.Categories != null)
             {
-               // model.Pager = new Pager(totalRecords, pageNo, 3);
+                model.Pager = new Pager(totalRecords, pageNo, 3);
 
                 return PartialView("_CategoryTable", model);
             }
@@ -107,5 +107,7 @@ namespace DestinaMarket.Web.Controllers
 
             return RedirectToAction("CategoryTable");
         }
+
+        
     }
 }
