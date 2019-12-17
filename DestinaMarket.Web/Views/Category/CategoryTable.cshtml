@@ -1,4 +1,4 @@
-﻿@model DestinaMarket.Web.ViewModels.CategorySearchViewModel
+﻿@model CategorySearchViewModel
 
 <div>
     <form method="post">
@@ -43,8 +43,17 @@
                 {
                     <tr>
                         <td>@category.Name</td>
-                        <td>@category.Products.Count</td>
                         <td>
+                        @category.Products.Count
+
+                            <br />
+
+                            @foreach (var product in category.Products)
+                            {
+                                <span>@product.Name, </span>
+                            }
+                        </td>
+                        <td class="wrap-td">
                             <button class="editBtn" data-id="@category.ID">Edit</button>
                             <button class="deleteBtn" data-id="@category.ID">Delete</button>
                         </td>
@@ -55,7 +64,6 @@
             {
                 <tr><td colspan="3" class="text-danger">No Categories Found.</td></tr>
             }
-
         </tbody>
     </table>
 </div>
@@ -65,7 +73,7 @@
         var searchValue = $("#searchTxt").val();
 
         $.ajax({
-            url: '/Category/Index',
+            url: @Url.Action("CategoryTable", "Category"),//'/Category/CategoryTable',
             data: {
                 search: searchValue
             }

@@ -11,34 +11,40 @@ namespace DestinaMarket.Web.Controllers
 {
     public class ProductController : Controller
     {
-        ProductsService productService = new ProductsService();
+       // ProductsService productService = new ProductsService();
         CategoriesService categoryService = new CategoriesService();
-        // GET: Product
+        
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult ProductTable(string search)
+        public ActionResult ProductTable(string search, int? pageNo)
        {
-            var products = productService.GetProducts();
+            ProductSearchViewModel model = new ProductSearchViewModel();
+            
+            model.PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+
+            model.Products = ProductsService.Instance.GetProducts(model.PageNo);
 
             if (string.IsNullOrEmpty(search) == false)
             {
-                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
+                model.SearchTerm = search;
+                model.Products = model.Products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
             }
 
-            return PartialView(products);
+            return PartialView(model);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            CategoriesService categoryService = new CategoriesService();
+            NewProductViewModel model = new NewProductViewModel();
 
-            var categories = categoryService.GetCategories();
-
-            return PartialView(categories);
+            model.AvailableCategories = categoryService.GetCategories();
+            
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -50,7 +56,7 @@ namespace DestinaMarket.Web.Controllers
             newProduct.Price = model.Price;
             newProduct.Category = categoryService.GetCategory(model.CategoryID);
 
-            productService.SaveProduct(newProduct);
+            ProductsService.Instance.SaveProduct(newProduct);
 
             return RedirectToAction("ProductTable");
         }
@@ -58,22 +64,29 @@ namespace DestinaMarket.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int ID)
         {
-            var product = productService.GetProduct(ID);
+            var product = ProductsService.Instance.GetProduct(ID);
 
             return PartialView(product);
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(EditProductViewModel model)
         {
-            productService.UpdateProduct(product);
+            var existingProduct = ProductsService.Instance.GetProduct(model.ID);
+            existingProduct.Name = model.Name;
+            existingProduct.Description = model.Description;
+            existingProduct.Price = model.Price;
+            existingProduct.Category = categoryService.GetCategory(model.CategoryID);
+
+            ProductsService.Instance.UpdateProduct(existingProduct);
+
             return RedirectToAction("ProductTable");
         }
 
         [HttpPost]
         public ActionResult Delete(int ID)
         {
-            productService.DeleteProduct(ID);
+            ProductsService.Instance.DeleteProduct(ID);
             return RedirectToAction("ProductTable");
         }
     }

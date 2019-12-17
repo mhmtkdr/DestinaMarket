@@ -10,6 +10,7 @@ namespace DestinaMarket.Web.ViewModels
     {
         public List<Product> Products { get; set; }
         public string SearchTerm { get; set; }
+        public int PageNo { get; set; }
     }
 
     public class NewProductViewModel
@@ -19,7 +20,9 @@ namespace DestinaMarket.Web.ViewModels
         public double Price { get; set; }
         public int CategoryID { get; set; }
         public string ImageURL { get; set; }
-        
+
+        public List<Category> AvailableCategories { get; set; }
+
     }
 
     public class EditProductViewModel
@@ -31,7 +34,9 @@ namespace DestinaMarket.Web.ViewModels
         public double Price { get; set; }
         public int CategoryID { get; set; }
         public string ImageURL { get; set; }
-        
+
+        public List<Category> AvailableCategories { get; set; }
+
     }
 
     public class ProductViewModel

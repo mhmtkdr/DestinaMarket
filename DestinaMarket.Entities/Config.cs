@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DestinaMarket.Entities
 {
-    public class Product : BaseEntity
+    public class Config
     {
-        public double Price { get; set; }
-        
-        public virtual Category Category { get; set; }
-        
+        [Key]
+        public string Key { get; set; }
+
+        public string Value { get; set; }
     }
 }

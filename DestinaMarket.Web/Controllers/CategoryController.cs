@@ -12,7 +12,6 @@ namespace DestinaMarket.Web.Controllers
 {
     public class CategoryController : Controller
     {
-
         CategoriesService categoryService = new CategoriesService();
         
         [HttpGet]
@@ -25,15 +24,19 @@ namespace DestinaMarket.Web.Controllers
         {
             CategorySearchViewModel model = new CategorySearchViewModel();
 
-            if (string.IsNullOrEmpty(search) == false)
+            model.Categories = categoryService.GetCategories();
+
+            if (!string.IsNullOrEmpty(search))
             {
                 model.SearchTerm = search;
 
-                model.Categories = model.Categories.Where(c => c.Name != null && c.Name.ToLower().Contains(search.ToLower())).ToList();
+                model.Categories = model.Categories.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
             }
 
             return PartialView("CategoryTable",model);
         }
+
+        #region Creation
 
         [HttpGet]
         public ActionResult Create()
@@ -57,6 +60,10 @@ namespace DestinaMarket.Web.Controllers
             return RedirectToAction("CategoryTable");
         }
 
+        #endregion
+
+        #region Updation
+
         [HttpGet]
         public ActionResult Edit(int ID)
         {
@@ -74,25 +81,25 @@ namespace DestinaMarket.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(EditCategoryViewModel model)
         {
-            categoryService.UpdateCategory(category);
+            var existingCategory = categoryService.GetCategory(model.ID);
+            existingCategory.Name = model.Name;
+            existingCategory.Description = model.Description;
+            existingCategory.ImageURL = model.ImageURL;
+            existingCategory.isFeatured = model.isFeatured;
+
+            categoryService.UpdateCategory(existingCategory);
             
             return RedirectToAction("CategoryTable");
         }
 
-        [HttpGet]
-        public ActionResult Delete(int ID)
-        {
-            var category = categoryService.GetCategory(ID);
-            
-            return RedirectToAction("CategoryTable");
-        }
+        #endregion
 
         [HttpPost]
-        public ActionResult Delete(Category category)
+        public ActionResult Delete(int ID)
         {
-            categoryService.DeleteCategory(category.ID);
+            categoryService.DeleteCategory(ID);
 
             return RedirectToAction("CategoryTable");
         }
