@@ -12,7 +12,11 @@ namespace DestinaMarket.Database
     {
         public DMContext() : base("DestinaMarket")
         {
-            
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().Property(p => p.Name).IsRequired().HasMaxLength(50);
         }
 
         public DbSet<Category> Categories { get; set; }
