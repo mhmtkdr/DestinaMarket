@@ -12,6 +12,7 @@ namespace DestinaMarket.Web.Controllers
     public class ProductController : Controller
     {
         ProductsService productService = new ProductsService();
+        CategoriesService categoryService = new CategoriesService();
         // GET: Product
         public ActionResult Index()
         {
@@ -41,11 +42,8 @@ namespace DestinaMarket.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(NewCategoryViewModel model)
+        public ActionResult Create(NewProductViewModel model)
         {
-
-            CategoriesService categoryService = new CategoriesService();
-            
             var newProduct = new Product();
             newProduct.Name = model.Name;
             newProduct.Description = model.Description;

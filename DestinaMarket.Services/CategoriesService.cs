@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DestinaMarket.Services
 {
@@ -24,6 +25,14 @@ namespace DestinaMarket.Services
             using (var context = new DMContext())
             {
                 return context.Categories.ToList();
+            }
+        }
+
+        public List<Category> GetFeaturedCategories()
+        {
+            using (var context = new DMContext())
+            {
+                return context.Categories.Where(x => x.isFeatured && x.ImageURL != null).ToList();
             }
         }
 

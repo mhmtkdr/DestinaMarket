@@ -6,9 +6,10 @@ using System.Web;
 
 namespace DestinaMarket.Web.ViewModels
 {
-    public class HomeViewModel
+    public class CheckoutViewModel
     {
-        public List<Category> FeaturedCategories { get; set; }
-        public List<Product> FeaturedProducts { get; set; }
+        public List<Product> CartProducts { get; set; }
+
+        public List<int> CartProductsIDs { get; set; }
     }
 }
