@@ -12,28 +12,32 @@ namespace DestinaMarket.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoriesService categoryService = new CategoriesService();
-        
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult CategoryTable(string search)
+        public ActionResult CategoryTable(string search, int? pageNo)
         {
             CategorySearchViewModel model = new CategorySearchViewModel();
+            model.SearchTerm = search;
 
-            model.Categories = categoryService.GetCategories();
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
 
-            if (!string.IsNullOrEmpty(search))
+            var totalRecords = CategoriesService.Instance.GetCategoriesCount(search);
+            model.Categories = CategoriesService.Instance.GetCategories(search, pageNo.Value);
+
+            if (model.Categories != null)
             {
-                model.SearchTerm = search;
+               // model.Pager = new Pager(totalRecords, pageNo, 3);
 
-                model.Categories = model.Categories.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
+                return PartialView("_CategoryTable", model);
             }
-
-            return PartialView("CategoryTable",model);
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         #region Creation
@@ -55,7 +59,7 @@ namespace DestinaMarket.Web.Controllers
             newCategory.ImageURL = model.ImageURL;
             newCategory.isFeatured = model.isFeatured;
 
-            categoryService.SaveCategory(newCategory);
+            CategoriesService.Instance.SaveCategory(newCategory);
 
             return RedirectToAction("CategoryTable");
         }
@@ -69,7 +73,7 @@ namespace DestinaMarket.Web.Controllers
         {
             EditCategoryViewModel model = new EditCategoryViewModel();
 
-            var category = categoryService.GetCategory(ID);
+            var category = CategoriesService.Instance.GetCategory(ID);
 
             model.ID = category.ID;
             model.Name = category.Name;
@@ -83,13 +87,13 @@ namespace DestinaMarket.Web.Controllers
         [HttpPost]
         public ActionResult Edit(EditCategoryViewModel model)
         {
-            var existingCategory = categoryService.GetCategory(model.ID);
+            var existingCategory = CategoriesService.Instance.GetCategory(model.ID);
             existingCategory.Name = model.Name;
             existingCategory.Description = model.Description;
             existingCategory.ImageURL = model.ImageURL;
             existingCategory.isFeatured = model.isFeatured;
 
-            categoryService.UpdateCategory(existingCategory);
+            CategoriesService.Instance.UpdateCategory(existingCategory);
             
             return RedirectToAction("CategoryTable");
         }
@@ -99,7 +103,7 @@ namespace DestinaMarket.Web.Controllers
         [HttpPost]
         public ActionResult Delete(int ID)
         {
-            categoryService.DeleteCategory(ID);
+            CategoriesService.Instance.DeleteCategory(ID);
 
             return RedirectToAction("CategoryTable");
         }

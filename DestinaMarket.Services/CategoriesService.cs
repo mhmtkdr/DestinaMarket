@@ -11,6 +11,21 @@ namespace DestinaMarket.Services
 {
     public class CategoriesService
     {
+        #region Singleton
+        public static CategoriesService Instance
+        {
+            get
+            {
+                if (instance == null) instance = new CategoriesService();
+
+                return instance;
+            }
+        }
+        private static CategoriesService instance { get; set; }
+        private CategoriesService()
+        {
+        }
+        #endregion
 
         public Category GetCategory(int ID)
         {
@@ -20,11 +35,56 @@ namespace DestinaMarket.Services
             }
         }
 
-        public List<Category> GetCategories()
+        public int GetCategoriesCount(string search)
         {
             using (var context = new DMContext())
             {
-                return context.Categories.ToList();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Categories.Where(category => category.Name != null &&
+                         category.Name.ToLower().Contains(search.ToLower())).Count();
+                }
+                else
+                {
+                    return context.Categories.Count();
+                }
+            }
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            using (var context = new DMContext())
+            {
+                return context.Categories
+                        .ToList();
+            }
+        }
+        
+        public List<Category> GetCategories(string search, int pageNo)
+        {
+            int pageSize = 3;
+
+            using (var context = new DMContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Categories.Where(category => category.Name != null &&
+                         category.Name.ToLower().Contains(search.ToLower()))
+                         .OrderBy(x => x.ID)
+                         .Skip((pageNo - 1) * pageSize)
+                         .Take(pageSize)
+                         .Include(x => x.Products)
+                         .ToList();
+                }
+                else
+                {
+                    return context.Categories
+                        .OrderBy(x => x.ID)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Products)
+                        .ToList();
+                }
             }
         }
 
@@ -58,8 +118,9 @@ namespace DestinaMarket.Services
         {
             using (var context = new DMContext())
             {
-                var category = context.Categories.Find(ID);
+                var category = context.Categories.Where(x => x.ID == ID).Include(x => x.Products).FirstOrDefault();
 
+                context.Products.RemoveRange(category.Products);
                 context.Categories.Remove(category);
                 context.SaveChanges();
             }

@@ -45,7 +45,7 @@ namespace DestinaMarket.Services
 
         public List<Product> GetProducts(int pageNo)
         {
-            int pageSize = 5;
+          //  int pageSize = 5;
 
             using (var context = new DMContext())
             {

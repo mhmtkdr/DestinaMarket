@@ -563,7 +563,7 @@
     <Content Include="Views\Product\ProductTable.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Category\CategoryTable.cshtml" />
+    <Content Include="Views\Category\_CategoryTable.cshtml" />
     <Content Include="Views\Shop\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>

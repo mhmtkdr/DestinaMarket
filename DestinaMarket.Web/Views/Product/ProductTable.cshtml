@@ -23,10 +23,13 @@
                 <div class="form-group">
                     <label>Action</label>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4 pr-0">
                             <button class="btn btn-primary form-control" type="button" id="searchBtn">Search</button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4 pr-0">
+                            <button class="btn btn-primary form-control" type="button" id="resetBtn">Reset</button>
+                        </div>
+                        <div class="col-md-4 pr-0">
                             <button class="btn btn-primary form-control" type="button" id="newBtn">New</button>
                         </div>
                     </div>
@@ -41,10 +44,10 @@
     <table id="ProductsTable" class="table table-striped">
         <thead>
             <tr>
-                <td>Product Name</td>
-                <td>Category</td>
-                <td>Price</td>
-                <td>Actions</td>
+                <th class="font-weight-bold">Product Name</th>
+                <th class="font-weight-bold">Category</th>
+                <th class="font-weight-bold">Price</th>
+                <th class="font-weight-bold wrap-td">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -126,6 +129,22 @@
         });
 	});
 
+    $("#resetBtn").click(function () {
+		var searchValue = '';
+
+		$.ajax({
+			url: '@Url.Action("ProductTable", "Product")',
+			data: {
+				search: searchValue
+			}
+		})
+        .done(function (response) {
+        	$("#tableContiner").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
 
     $("#newBtn").click(function () {
 		$.ajax({
@@ -178,7 +197,7 @@
                         .done(function (response) {
                             $("#tableContiner").html(response);
 
-                            swal("Poof! Your product has been deleted!", {
+                            swal("Record deleted Successfully.", {
                                 icon: "success",
                             });
                         })
