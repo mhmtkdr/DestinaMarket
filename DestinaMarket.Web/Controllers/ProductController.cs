@@ -19,17 +19,17 @@ namespace DestinaMarket.Web.Controllers
 
         public ActionResult ProductTable(string search, int? pageNo)
        {
+            var pageSize = ConfigurationsService.Instance.PageSize();
+
             ProductSearchViewModel model = new ProductSearchViewModel();
-            
-            model.PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+            model.SearchTerm = search;
 
-            model.Products = ProductsService.Instance.GetProducts(model.PageNo);
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
 
-            if (string.IsNullOrEmpty(search) == false)
-            {
-                model.SearchTerm = search;
-                model.Products = model.Products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
-            }
+            var totalRecords = ProductsService.Instance.GetProductsCount(search);
+            model.Products = ProductsService.Instance.GetProducts(search, pageNo.Value, pageSize);
+
+            model.Pager = new Pager(totalRecords, pageNo, pageSize);
 
             return PartialView(model);
         }

@@ -3,7 +3,7 @@
     ViewBag.Title = "ProductTable";
 }
 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
@@ -85,23 +85,38 @@
             }
         </tbody>
     </table>
-    @*<div>
-        @if (Model.PageNo != 1)
+    <div>
+        @if (Model.Pager != null && Model.Pager.TotalPages > 1)
         {
-            <button class="pageButtons" data-pageNo="@(Model.PageNo - 1)">Previous</button>
+
+            if (Model.Pager.CurrentPage > 1)
+            {
+                <button class="pageButtons" data-pageno="1">First</button>
+                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage - 1)">Previous</button>
+            }
+
+            for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                string activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
+
+                <button class="@activeClass pageButtons" data-pageno="@page">@page</button>
+            }
+
+            if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)">Next</button>
+                <button class="pageButtons" data-pageno="@Model.Pager.EndPage">Last</button>
+            }
         }
-        <button class="pageButtons" data-pageNo="@(Model.PageNo + 1)">Next</button>
-    </div>*@
+    </div>
 </div>
 
 <script>
-    $('#ProductsTable').DataTable();
-
     $(".pageButtons").click(function () {
 		$.ajax({
             url: '@Url.Action("ProductTable", "Product")',
             data: {
-                pageNo: $(this).attr("data-pageNo")
+                pageNo: $(this).attr("data-pageno")
             }
 		})
         .done(function (response) {
@@ -219,6 +234,6 @@
 
         alert("addtocart");
     });
-    
+
 </script>
 

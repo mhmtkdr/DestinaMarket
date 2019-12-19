@@ -145,12 +145,12 @@ namespace DestinaMarket.Services
 
         public List<Product> GetProducts(int pageNo)
         {
-          //  int pageSize = 5;
+            int pageSize = 5;
 
             using (var context = new DMContext())
             {
-            //    return context.Products.OrderBy(x=> x.ID).Skip((pageNo-1)*pageSize).Take(pageSize).Include(x=>x.Category).ToList();
-                return context.Products.Include(x => x.Category).ToList();
+                return context.Products.OrderBy(x=> x.ID).Skip((pageNo-1)*pageSize).Take(pageSize).Include(x=>x.Category).ToList();
+            //    return context.Products.Include(x => x.Category).ToList();
             }
         }
 
@@ -159,6 +159,49 @@ namespace DestinaMarket.Services
             using (var context = new DMContext())
             {
                 return context.Products.OrderByDescending(x => x.ID).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(x => x.Category).ToList();
+            }
+        }
+
+        public List<Product> GetProducts(string search, int pageNo, int pageSize)
+        {
+            using (var context = new DMContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(product => product.Name != null &&
+                         product.Name.ToLower().Contains(search.ToLower()))
+                         .OrderBy(x => x.ID)
+                         .Skip((pageNo - 1) * pageSize)
+                         .Take(pageSize)
+                         .Include(x => x.Category)
+                         .ToList();
+                }
+                else
+                {
+                    return context.Products
+                        .OrderBy(x => x.ID)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Category)
+                        .ToList();
+                }
+            }
+        }
+
+        public int GetProductsCount(string search)
+        {
+            using (var context = new DMContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Products.Where(product => product.Name != null &&
+                         product.Name.ToLower().Contains(search.ToLower()))
+                         .Count();
+                }
+                else
+                {
+                    return context.Products.Count();
+                }
             }
         }
 
