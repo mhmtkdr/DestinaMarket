@@ -1,4 +1,5 @@
 ﻿using DestinaMarket.Entities;
+using DestinaMarket.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace DestinaMarket.Web.ViewModels
         public List<Product> CartProducts { get; set; }
 
         public List<int> CartProductsIDs { get; set; }
+
+        public ApplicationUser User { get; set; }
     }
 
     public class ShopViewModel

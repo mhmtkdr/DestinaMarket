@@ -199,6 +199,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -206,6 +207,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912190006136_InitialCreate.cs" />
+    <Compile Include="Migrations\201912190006136_InitialCreate.Designer.cs">
+      <DependentUpon>201912190006136_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912211040487_AddedNewPropertiesToUser.cs" />
+    <Compile Include="Migrations\201912211040487_AddedNewPropertiesToUser.Designer.cs">
+      <DependentUpon>201912211040487_AddedNewPropertiesToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -580,6 +590,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\about\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -599,6 +610,14 @@
       <Project>{66D65602-ACFB-481A-8BF7-88CC9C01020D}</Project>
       <Name>DestinaMarket.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912190006136_InitialCreate.resx">
+      <DependentUpon>201912190006136_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912211040487_AddedNewPropertiesToUser.resx">
+      <DependentUpon>201912211040487_AddedNewPropertiesToUser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

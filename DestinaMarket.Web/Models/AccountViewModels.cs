@@ -65,6 +65,14 @@ namespace DestinaMarket.Web.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "İsim Soyisim")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Adres")]
+        public string Address { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "E-posta")]
         public string Email { get; set; }
