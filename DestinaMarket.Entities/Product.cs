@@ -11,8 +11,8 @@ namespace DestinaMarket.Entities
     {
         [Range(1, 100000)]
         public double Price { get; set; }
-        
-        //public int CategoryID{get;set;}
+
+        public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
 
         public string ImageURL { get; set; }

@@ -2,10 +2,6 @@
 @{
     ViewBag.Title = "Home Page";
 
-    var firstCategory = Model.FeaturedCategories[0];
-    var secondCategory = Model.FeaturedCategories[1];
-    var thirdCategory = Model.FeaturedCategories[2];
-    var fourthCategory = Model.FeaturedCategories[3];
 }
 
 <!-- SLIDER -->
@@ -187,6 +183,15 @@
 </div>
 <!-- END SLIDER -->
 
+@if (Model.FeaturedCategories != null & Model.FeaturedCategories.Count >=4)
+{
+
+    var firstCategory = Model.FeaturedCategories[0];
+    var secondCategory = Model.FeaturedCategories[1];
+    var thirdCategory = Model.FeaturedCategories[2];
+    var fourthCategory = Model.FeaturedCategories[3];
+
+
 <!-- IMAGE BOX -->
 <section class="flat-row row-image-box">
     <div class="container">
@@ -267,7 +272,7 @@
     </div><!-- /.container -->
 </section>
 <!-- END IMAGE BOX -->
-
+}
 <!-- PRODUCT NEW -->
 <section class="flat-row row-product-new">
     <div class="container">

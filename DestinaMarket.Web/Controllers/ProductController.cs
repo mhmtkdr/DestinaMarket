@@ -47,6 +47,7 @@ namespace DestinaMarket.Web.Controllers
         [HttpPost]
         public ActionResult Create(NewProductViewModel model)
         {
+            
             var newProduct = new Product();
             newProduct.Name = model.Name;
             newProduct.Description = model.Description;
@@ -55,8 +56,9 @@ namespace DestinaMarket.Web.Controllers
             newProduct.ImageURL = model.ImageURL;
 
             ProductsService.Instance.SaveProduct(newProduct);
-
+            
             return RedirectToAction("ProductTable");
+            
         }
 
         [HttpGet]
@@ -85,8 +87,14 @@ namespace DestinaMarket.Web.Controllers
             existingProduct.Name = model.Name;
             existingProduct.Description = model.Description;
             existingProduct.Price = model.Price;
-            existingProduct.Category = CategoriesService.Instance.GetCategory(model.CategoryID);
-            existingProduct.ImageURL = model.ImageURL;
+
+            existingProduct.Category = null; //mark it null. Because the referncy key is changed below
+            existingProduct.CategoryID = model.CategoryID;
+
+            if (!string.IsNullOrEmpty(model.ImageURL))
+            {
+                existingProduct.ImageURL = model.ImageURL;
+            }
 
             ProductsService.Instance.UpdateProduct(existingProduct);
 
