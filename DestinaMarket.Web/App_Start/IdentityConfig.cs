@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using DestinaMarket.Web.Models;
+using System.Net.Mail;
 
 namespace DestinaMarket.Web
 {
@@ -19,7 +20,13 @@ namespace DestinaMarket.Web
         public Task SendAsync(IdentityMessage message)
         {
             // E-posta göndermek için e-posta hizmetinizi buraya bağlayın.
-            return Task.FromResult(0);
+            SmtpClient client = new SmtpClient();
+            return client.SendMailAsync("email from web.config here",
+                                        message.Destination,
+                                        message.Subject,
+                                        message.Body);
+
+            //return Task.FromResult(0);
         }
     }
 

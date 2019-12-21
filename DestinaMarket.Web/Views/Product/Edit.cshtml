@@ -1,17 +1,17 @@
 ﻿@model EditProductViewModel
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Düzenleme";
 
     var imageURL = !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/Content/images/system/placeholder-image.png";
 }
 
-<h2>Edit Product</h2>
+<h2>Ürün Düzemleme</h2>
 <form id="editProduct">
     <input type="hidden" name="ID" value="@Model.ID" />
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
-                <label>Category</label>
+                <label>Kategori</label>
                 <select class="form-control" name="CategoryID">
                     @foreach (var category in Model.AvailableCategories)
                     {
@@ -21,25 +21,25 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Name</label>
+                <label>İsim</label>
                 <input class="form-control" name="Name" value="@Model.Name" />
             </div>
             <div class="form-group">
-                <label>Description</label>
+                <label>Açıklama</label>
                 <input class="form-control" name="Description" value="@Model.Description" />
             </div>
             <div class="form-group">
-                <label>Price</label>
+                <label>Fiyat</label>
                 <input class="form-control" name="Price" value="@Model.Price" />
             </div>
             <div class="form-group">
-                <label>Image</label>
+                <label>Resim</label>
                 <input type="hidden" id="ImageURL" name="ImageURL" />
                 <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" />
             </div>
 
-            <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
-            <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+            <button id="updateBtn" type="button" class="btn btn-primary">Güncelle</button>
+            <button id="cancelBtn" type="button" class="btn btn-primary">İptal</button>
         </div>
         <div class="col-md-4">
             <div class="thumb">
@@ -68,15 +68,15 @@
         },
         messages: {
             Name: {
-                required: 'Name is required',
-                minlength: 'Minimum Length is 5',
-                maxlength: 'Maximum Length is 50'
+                required: 'Boş Bırakılamaz.',
+                minlength: 'En az 5 Karakter',
+                maxlength: 'En çok 50 Karakter'
             },
             Description: {
-                maxlength: 'Maximum Length is 500'
+                maxlength: 'En çok 500 Karakter'
             },
             Price: {
-                range: 'Price must be within range of 1 - 100000.'
+                range: 'Fiyat Aralığı 1 - 100000.'
             }
         }
     });
@@ -132,8 +132,8 @@
 		}
 		else {
 			swal({
-				title: "Warning",
-				text: "Please enter all valid data in fields.",
+				title: "Uyarı",
+				text: "Bütün Alanları Doldurunuz.",
 				icon: "warning",
 				buttons: true,
 				dangerMode: true,

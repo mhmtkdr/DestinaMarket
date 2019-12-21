@@ -1,6 +1,6 @@
 ﻿@model DestinaMarket.Web.ViewModels.HomeViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Ana Menü";
 
 }
 
@@ -11,10 +11,10 @@
             <!-- Slide 1 -->
             <li data-transition="random">
                 <!-- Main Image -->
-                <img src="~/Content/images/slider/slider-bg-5.jpg" alt="" data-bgposition="center center" data-no-retina>
+                <img src="~/Content/images/tu.jpg" alt="" data-bgposition="center center" data-no-retina>
 
                 <!-- Layers -->
-                <div class="tp-caption tp-resizeme text-white font-weight-300"
+                @*<div class="tp-caption tp-resizeme text-white font-weight-300"
                      data-x="['left','left','left','center']" data-hoffset="['0','0','0','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['-93','-93','-93','-93']"
                      data-fontsize="['24','24','24','18']"
@@ -31,8 +31,8 @@
                      data-splitin="none"
                      data-splitout="none"
                      data-responsive_offset="on">
-                    NEW TREND 2018
-                </div>
+                    YENİ ÜRÜNLER 2020
+                </div>*@
 
                 <div class="tp-caption tp-resizeme text-white font-weight-500"
                      data-x="['left','left','left','center']" data-hoffset="['0','0','0','0']"
@@ -51,7 +51,7 @@
                      data-splitin="none"
                      data-splitout="none"
                      data-responsive_offset="on">
-                    New Collection
+                    YENİ ÜRÜNLER 2020
                 </div>
 
                 <div class="tp-caption tp-resizeme text-white font-weight-400 "
@@ -71,7 +71,7 @@
                      data-splitin="none"
                      data-splitout="none"
                      data-responsive_offset="on">
-                    BIG SALE OF THIS WEEK UP TO 30%
+                    BU HAFTASONU 30% İNDİRİM
                 </div>
 
                 <div class="tp-caption"
@@ -89,11 +89,11 @@
                      data-splitin="none"
                      data-splitout="none"
                      data-responsive_offset="on">
-                    <a href="#" class="themesflat-button has-padding-36 bg-accent has-shadow"><span>SHOP NOW</span></a>
+                    <a href="@Url.Action("Index", "Shop")" class="themesflat-button has-padding-36 bg-accent has-shadow"><span>ŞİPARİŞ VER</span></a>
                 </div>
             </li>
             <!-- /End Slide 1 -->
-            <!-- Slide 2 -->
+            @*<!-- Slide 2 -->
             <li data-transition="random">
                 <!-- Main Image -->
                 <img src="~/Content/images/slider/slider-bg-1.jpg" alt="" data-bgposition="center center" data-no-retina>
@@ -116,7 +116,7 @@
                      data-splitin="none"
                      data-splitout="none"
                      data-responsive_offset="on">
-                    <span class="text-line left"></span>Summer Fashion<span class="text-line right"></span>
+                    <span class="text-line left"></span>OYUNCU <span class="text-line right"></span>
                 </div>
 
                 <div class="tp-caption tp-resizeme text-333 font-weight-500 letter-spacing-10 text-right"
@@ -177,7 +177,7 @@
                     <a href="#" class="themesflat-button bg-accent has-shadow"><span>BY NOW</span></a>
                 </div>
             </li>
-            <!-- /End Slide 2 -->
+            <!-- /End Slide 2 -->*@
         </ul>
     </div>
 </div>
@@ -280,7 +280,7 @@
             <div class="col-md-12">
                 <div class="title-section margin-bottom-52">
                     <h2 class="title">
-                        New Product
+                        Yeni Ürünler
                     </h2>
                 </div>
                 
@@ -298,12 +298,12 @@
             <div class="col-md-12">
                 <div class="flat-animation-block">
                     <div class="title-section width-before-17 bg-before-white margin-bottom-14">
-                        <div class="sup-title"><span>NEW TREND 2018</span></div>
-                        <h2 class="title font-size-52 line-height-76">Women‘s Collection</h2>
-                        <div class="sub-title"><span>Big Sale of this Week</span></div>
+                        <div class="sup-title"><span></span></div>
+                        <h2 class="title font-size-52 line-height-76">Oyuncu Aksesuarları</h2>
+                        <div class="sub-title"><span>Bu Haftaya Özel Büyük İndirim</span></div>
                     </div>
                     <div class="elm-btn text-center">
-                        <a href="#" class="themesflat-button bg-accent has-padding-36">Shop Now</a>
+                        <a href="@Url.Action("Index", "Shop")" class="themesflat-button bg-accent has-padding-36">SİPARİŞ VER</a>
                     </div>
                 </div><!-- /.flat-animation-block -->
             </div>
@@ -317,7 +317,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="title-section margin-bottom-41">
-                    <h2 class="title">Best Sale</h2>
+                    <h2 class="title">EN ÇOK SATANLAR</h2>
                 </div>
                 
 
@@ -340,8 +340,8 @@
                             <i class="fa fa-truck"></i>
                         </div>
                         <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Free Shipping</a></h5>
-                            <p class="desc">Free Shipping on order over $99</p>
+                            <h5 class="heading"><a href="#">Bedava Kargo</a></h5>
+                            <p class="desc">6.000 ₺ Üzeri Siparişlerinizde Bedava Kargo İmkanı</p>
                         </div>
                     </div>
                 </div>
@@ -353,8 +353,8 @@
                             <i class="fa fa-money"></i>
                         </div>
                         <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Cash On Delivery</a></h5>
-                            <p class="desc">The Internet Trend To Repeat</p>
+                            <h5 class="heading"><a href="#">Kapıda Ödeme</a></h5>
+                            <p class="desc">Kolay Ödeme Seçenekleri</p>
                         </div>
                     </div>
                 </div>
@@ -366,8 +366,8 @@
                             <i class="fa fa-gift"></i>
                         </div>
                         <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Gift For All</a></h5>
-                            <p class="desc">Receive Gift When Subscribe</p>
+                            <h5 class="heading"><a href="#">Özel Hediyeler</a></h5>
+                            <p class="desc">Haftanın En Çok Sipariş Verenlerine</p>
                         </div>
                     </div>
                 </div>
@@ -379,8 +379,8 @@
                             <i class="fa fa-clock-o"></i>
                         </div>
                         <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Opening All Week</a></h5>
-                            <p class="desc">6.00 am - 17.00pm</p>
+                            <h5 class="heading"><a href="#">Haftanın Hergünü Açık</a></h5>
+                            <p class="desc">06.00 - 17.00</p>
                         </div>
                     </div>
                 </div>

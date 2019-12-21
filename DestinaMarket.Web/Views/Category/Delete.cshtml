@@ -1,15 +1,15 @@
 ﻿@model DestinaMarket.Entities.Category
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Sil";
 }
 
-<h2>Delete Category</h2>
+<h2>Kategori Sil</h2>
 
-<h1>Are you sure want to delete this category?</h1>
+<h1>Bu Kategoriyi Silmek İstiyor Musunuz?</h1>
 
 <form method="post">
     <input type="hidden" name="ID" value="@Model.ID" />
-    <button type="submit">Yes,Delete</button>
+    <button type="submit">Evet, Sil</button>
 </form>
 
-<a href="/Index">Cancel</a>
+<a href="/Index">İptal</a>

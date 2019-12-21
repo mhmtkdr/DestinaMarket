@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-title-heading">
-                    <h1 class="title">Shop</h1>
+                    <h1 class="title">Alışveriş</h1>
                 </div><!-- /.page-title-heading -->
             </div><!-- /.col-md-12 -->
         </div><!-- /.row -->
@@ -35,18 +35,18 @@
                     </div><!-- /.widget-search -->
                     <div class="widget widget-sort-by">
                         <h5 class="widget-title">
-                            Sort By
+                            Sırala
                         </h5>
                         <ul>
-                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.Default, categoryID = Model.CategoryID })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.Default ? "active" : string.Empty : string.Empty)">Default - Newest</a></li>
-                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.Popularity, categoryID = Model.CategoryID  })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.Popularity ? "active" : string.Empty : string.Empty)">Popularity</a></li>
-                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.PriceLowToHigh, categoryID = Model.CategoryID  })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.PriceLowToHigh ? "active" : string.Empty : string.Empty)">Price: low to high</a></li>
-                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.PriceHighToLow, categoryID = Model.CategoryID  })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.PriceHighToLow ? "active" : string.Empty : string.Empty)">Price: high to low</a></li>
+                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.Default, categoryID = Model.CategoryID })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.Default ? "active" : string.Empty : string.Empty)">Popüler</a></li>
+                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.Popularity, categoryID = Model.CategoryID  })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.Popularity ? "active" : string.Empty : string.Empty)">En Yeniler</a></li>
+                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.PriceLowToHigh, categoryID = Model.CategoryID  })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.PriceLowToHigh ? "active" : string.Empty : string.Empty)">Fiyat: Azdan Yüksek</a></li>
+                            <li><a data-href="@Url.Action("FilterProducts", "Shop", new { sortBy = (int)SortByEnums.PriceHighToLow, categoryID = Model.CategoryID  })" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnums.PriceHighToLow ? "active" : string.Empty : string.Empty)">Fiyat: Yüksekten Aza</a></li>
                         </ul>
                     </div>
                     <div class="widget widget_tag">
                         <h5 class="widget-title">
-                            Featured Categories
+                            Kategori
                         </h5>
                         <div class="tag-list">
                             @foreach (var category in Model.FeaturedCategories)
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="widget widget-price">
-                        <h5 class="widget-title">Filter by price</h5>
+                        <h5 class="widget-title">Fiyata Göre Filtre</h5>
                         <div class="price-filter">
                             <div id="slide-range"></div>
                             <p class="amount">
@@ -64,7 +64,7 @@
                             </p>
                         </div>
                     </div><!-- /.widget -->
-                    <a href="@Url.Action("Index", "Shop")" class="btn btn-danger">Reset Filters</a>
+                    <a href="@Url.Action("Index", "Shop")" class="btn btn-danger">Sıfırla</a>
                 </div><!-- /.sidebar -->
             </div><!-- /.col-md-3 -->
             <div class="col-md-9">
@@ -97,7 +97,7 @@
 			var minPrice = ui.values[0];
 			var maxPrice = ui.values[1];
 
-			$("#amount").val("$" + minPrice + ".00" + " - " + "$" + maxPrice + ".00");
+			$("#amount").val("₺" + minPrice + ".00" + " - " + "₺" + maxPrice + ".00");
 
 			clearTimeout(callTimeout);
 			callTimeout = setTimeout(PriceRangeChange, 500);

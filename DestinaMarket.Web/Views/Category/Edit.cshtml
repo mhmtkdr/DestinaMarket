@@ -1,6 +1,6 @@
 ﻿@model DestinaMarket.Web.ViewModels.EditCategoryViewModel
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Düzenle";
 
     var trueChecked = Model.isFeatured ? "checked" : string.Empty;
     var falseChecked = !Model.isFeatured ? "checked" : string.Empty;
@@ -8,7 +8,7 @@
     var imageURL= !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/Content/images/system/place-holder-image.png";
 }
 
-<h2>Edit Category</h2>
+<h2>Kategori Düzenleme</h2>
 
 <form id="editCategory">
     <input type="hidden" name="ID" value="@Model.ID" />
@@ -16,26 +16,26 @@
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
-                <label>Name</label>
+                <label>İsim</label>
                 <input class="form-control" name="Name" value="@Model.Name" />
             </div>
             <div class="form-group">
-                <label>Description</label>
+                <label>Açıklama</label>
                 <input class="form-control" name="Description" value="@Model.Description" />
             </div>
             <div class="form-group">
-                <label>Image</label>
+                <label>Resim</label>
                 <input type="hidden" id="ImageURL" name="ImageURL" value="@Model.ImageURL" />
                 <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" />
             </div>
             <div class="form-group">
-                <label>Is Featured?</label>
+                <label>Özellikli?</label>
                 <div class="input-group">
                     <div class="radio form-control">
-                        <label><input name="isFeatured" type="radio" value="True" @trueChecked /> True</label>
+                        <label><input name="isFeatured" type="radio" value="True" @trueChecked /> Evet</label>
                     </div>
                     <div class="radio form-control">
-                        <label><input name="isFeatured" type="radio" value="False" @falseChecked /> False</label>
+                        <label><input name="isFeatured" type="radio" value="False" @falseChecked /> Hayır</label>
                     </div>
                 </div>
             </div>
@@ -47,8 +47,8 @@
         </div>
     </div>
 
-    <button id="updateBtn" type="button" class="btn btn-primary">Update</button>
-    <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+    <button id="updateBtn" type="button" class="btn btn-primary">Güncelle</button>
+    <button id="cancelBtn" type="button" class="btn btn-primary">İptal</button>
 </form>
 
 <script>

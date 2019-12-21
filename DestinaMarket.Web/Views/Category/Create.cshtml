@@ -1,36 +1,36 @@
 ﻿
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Oluştur";
 
     var imageURL = "/Content/images/system/place-holder-image.png";
 }
 
-<h2>Create Category</h2>
+<h2>Kategori Oluştur</h2>
 
 <form id="createCategory">
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
-                <label>Name <span class="text-danger">*</span></label>
+                <label>İsim <span class="text-danger">*</span></label>
                 <input class="form-control" name="Name" />
             </div>
             <div class="form-group">
-                <label>Description</label>
+                <label>Açıklama</label>
                 <input class="form-control" name="Description" />
             </div>
             <div class="form-group">
-                <label>Image</label>
+                <label>Resim</label>
                 <input type="hidden" id="ImageURL" name="ImageURL" />
                 <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" />
             </div>
             <div class="form-group">
-                <label>Is Featured?</label>
+                <label>Özellikli?</label>
                 <div class="input-group">
                     <div class="radio form-control">
-                        <label><input name="isFeatured" type="radio" value="True" /> True</label>
+                        <label><input name="isFeatured" type="radio" value="True" /> Evet</label>
                     </div>
                     <div class="radio form-control">
-                        <label><input name="isFeatured" type="radio" value="False" /> False</label>
+                        <label><input name="isFeatured" type="radio" value="False" /> Hayır</label>
                     </div>
                 </div>
             </div>
@@ -44,8 +44,8 @@
         </div>
 
 
-        <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
-        <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+        <button id="saveBtn" type="button" class="btn btn-primary">Kaydet</button>
+        <button id="cancelBtn" type="button" class="btn btn-primary">İptal</button>
 </form>
 
 <script>
@@ -97,12 +97,12 @@
         },
         messages: {
             Name: {
-                required: 'Name is required',
-                minlength: 'Minimum Length is 5',
-                maxlength: 'Maximum Length is 50'
+                required: 'Boş Bırakılamaz',
+                minlength: 'En az 5 Karakter',
+                maxlength: 'En çok 50 Karakter'
             },
             Description: {
-                maxlength: 'Maximum Length is 500'
+                maxlength: 'En çok 500 Karakter'
             }
         }
     });
@@ -122,8 +122,8 @@
 			})
 			.fail(function (XMLHttpRequest, textStatus, errorThrown) {
 				swal({
-					title: "Warning",
-					text: "Please enter all required fields.",
+					title: "Uyarı",
+					text: "Bütün Alanları Doldurunuz.",
 					icon: "warning",
 					buttons: true,
 					dangerMode: true,
@@ -132,8 +132,8 @@
 		}
 		else {
 			swal({
-				title: "Warning",
-				text: "Please enter all valid data in fields.",
+				title: "Uyarı",
+                text: "Bütün Alanları Doldurunuz.",
 				icon: "warning",
 				buttons: true,
 				dangerMode: true,

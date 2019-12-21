@@ -1,7 +1,7 @@
 ﻿@model OrdersViewModel
 
 @{
-    ViewBag.Title = "Orders";
+    ViewBag.Title = "Siparişler";
 }
 
 <section class="flat-row flat-iconbox">
@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="title-section">
                     <h2 class="title">
-                        Orders
+                        Siparişler
                     </h2>
                 </div>
             </div>
@@ -23,19 +23,19 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label>Search</label>
+                                <label>Ara</label>
                                 <input class="form-control" id="searchTxt" name="UserID" value="@Model.UserID" />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Action</label>
+                                <label>Eylem</label>
                                 <div class="row">
                                     <div class="col-md-4 pr-0">
-                                        <button class="btn btn-primary form-control" type="submit" id="searchBtn">Search</button>
+                                        <button class="btn btn-primary form-control" type="submit" id="searchBtn">Ara</button>
                                     </div>
                                     <div class="col-md-4 pr-0">
-                                        <a class="btn btn-primary form-control" type="button" id="resetBtn" href="@Url.Action("Index", "Order", new { pageNo = 1 })">Reset</a>
+                                        <a class="btn btn-primary form-control" type="button" id="resetBtn" href="@Url.Action("Index", "Order", new { pageNo = 1 })">Sıfırla</a>
                                     </div>
                                 </div>
                             </div>
@@ -48,10 +48,10 @@
                 <table id="OrdersTable" class="table table-striped">
                     <thead>
                         <tr>
-                            <th class="font-weight-bold">User ID</th>
-                            <th class="font-weight-bold">Total Price</th>
-                            <th class="font-weight-bold">Status</th>
-                            <th class="font-weight-bold wrap-td">Actions</th>
+                            <th class="font-weight-bold">Kullanıcı ID</th>
+                            <th class="font-weight-bold">Toplam Ücret</th>
+                            <th class="font-weight-bold">Statü</th>
+                            <th class="font-weight-bold wrap-td">Eylemler</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,11 +63,11 @@
                                 <tr>
                                     <td>@order.UserID</td>
                                     <td>
-                                        @order.TotalAmount .00
+                                        @order.TotalAmount .00₺
                                     </td>
                                     <td>@order.Status</td>
                                     <td class="wrap-td">
-                                        <a class="detailBtn" data-id="@order.ID" href="@Url.Action("Details", "Order", new { ID = order.ID })">Details</a>
+                                        <a class="detailBtn" data-id="@order.ID" href="@Url.Action("Details", "Order", new { ID = order.ID })">Detaylar</a>
                                     </td>
                                 </tr>
                             }
@@ -75,7 +75,7 @@
                         else
                         {
                             <tr>
-                                <td class="text-danger" colspan="4">No Order found.</td>
+                                <td class="text-danger" colspan="4">Sipariş Bulunamadı.</td>
                             </tr>
                         }
                     </tbody>
@@ -86,8 +86,8 @@
 
                         if (Model.Pager.CurrentPage > 1)
                         {
-                            <a class="pageButtons" data-pageno="1" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = 1 })">First</a>
-                            <a class="pageButtons" data-pageno="@(Model.Pager.CurrentPage - 1)" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = Model.Pager.CurrentPage - 1 })">Previous</a>
+                            <a class="pageButtons" data-pageno="1" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = 1 })">İlk</a>
+                            <a class="pageButtons" data-pageno="@(Model.Pager.CurrentPage - 1)" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = Model.Pager.CurrentPage - 1 })">Önceki</a>
                         }
 
                         for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
@@ -99,8 +99,8 @@
 
                         if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                         {
-                            <a class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = Model.Pager.CurrentPage + 1 })">Next</a>
-                            <a class="pageButtons" data-pageno="@Model.Pager.EndPage" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = Model.Pager.EndPage })">Last</a>
+                            <a class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = Model.Pager.CurrentPage + 1 })">Sonraki</a>
+                            <a class="pageButtons" data-pageno="@Model.Pager.EndPage" href="@Url.Action("Index", "Order", new { userID = Model.UserID, status = Model.Status, pageNo = Model.Pager.EndPage })">Son</a>
                         }
                     }
                 </div>

@@ -11,5 +11,6 @@ namespace DestinaMarket.Web.ViewModels
         public List<Product> Products { get; set; }
 
         public bool IsLatestProducts { get; set; }
+
     }
 }

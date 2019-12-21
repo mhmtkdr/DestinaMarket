@@ -8,50 +8,50 @@
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">Your cart</span>
+                        <span class="text-muted">Sepetin</span>
                     </h4>
                     <ul class="list-group mb-3">
                         @foreach (var orderItem in Model.Order.OrderItems)
                         {
                             <li class="list-group-item d-flex justify-content-between lh-condensed" data-id="@orderItem.ID">
                                 <div>
-                                    <h6 class="my-0">@i - @orderItem.Product.Name - Qty: @orderItem.Quantity</h6>
+                                    <h6 class="my-0">@i - @orderItem.Product.Name - Adet: @orderItem.Quantity</h6>
                                     <small class="text-muted">@(orderItem.Product.Description.Length > 100 ? orderItem.Product.Description.Substring(0, 99) : orderItem.Product.Description)</small>
                                 </div>
-                                <span class="text-muted">Unit Price: $ @orderItem.Product.Price - Total Price: @(orderItem.Quantity * orderItem.Product.Price)</span>
+                                <span class="text-muted">Tek Adet: $ @orderItem.Product.Price - Toplam: @(orderItem.Quantity * orderItem.Product.Price)</span>
                             </li>
 
                             i++;
                         }
 
                         <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
+                            <span>Toplam (TL)</span>
                             <strong>$ @Model.Order.TotalAmount</strong>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-8 order-md-1">
-                    <h4 class="mb-3">Billing address</h4>
+                    <h4 class="mb-3">Fatura Adresi</h4>
                     <form class="needs-validation" novalidate="">
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <label for="firstName">Name</label>
+                                <label for="firstName">İsim</label>
                                 <input type="text" class="form-control" id="Name" placeholder="" value="@Model.OrderBy.Name" required="">
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                            <label for="email">E-mail <span class="text-muted">(Optional)</span></label>
                             <input type="email" class="form-control" id="Email" placeholder="you@example.com" value="@Model.OrderBy.Email">
                         </div>
 
                         <div class="mb-3">
-                            <label for="address">Address</label>
+                            <label for="address">Adres</label>
                             <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" value="@Model.OrderBy.Address">
                         </div>
 
                         <div class="mb-3">
-                            <label for="address">Status</label>
+                            <label for="address">Statü</label>
                             <select name="Status" id="changeStatus">
                                 @foreach (var availableStatus in Model.AvailableStatuses)
                                 {
@@ -80,7 +80,7 @@
         .done(function (response) {
         	if(response.Success)
         	{
-        		swal("Done", "Your Order has been updated.", "success");
+        		swal("Başarılı", "Sipariş Güncellendi.", "success");
         	}
         	else {
         		swal("Error", "Unable to update Order", "warning");
@@ -95,6 +95,6 @@
 else
 {
     <div>
-        <b>Order Details not availble</b>
+        <b>Sipariş Detayları Bulunamadı.</b>
     </div>
 }
