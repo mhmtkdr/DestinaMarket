@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
+using System.Net.Mail;
+//using System.Text;
 
 namespace DestinaMarket.Web.Controllers
 {
@@ -100,6 +103,13 @@ namespace DestinaMarket.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int ProductID)
+        {
+            ShopService.Instance.DeleteOrder(ProductID);
+            return RedirectToAction("Checkout");
+        }
+
         public JsonResult PlaceOrder(string productIDs)
         {
                 JsonResult result = new JsonResult();
@@ -132,6 +142,43 @@ namespace DestinaMarket.Web.Controllers
 
             return result;
         }
+
+        public JsonResult SendMailToUser()
+        {
+            bool resulte = false;
+
+            resulte = SendMail(User.Identity.Name, "DestinaMarket", "<p>Merhaba Değerli Müşterimiz,99223235 numaralı siparişiniz alınmıştır. Alışverişinde bizi tercih ettiğin için teşekkür ederiz. Siparişin kargoya verildiğinde seni bilgilendireceğiz.</p>");
+
+            return Json(resulte, JsonRequestBehavior.AllowGet);
+        }
+        public bool SendMail(string toEmail,string subject,string emailBody)
+        {
+            try
+            {
+                string senderEmail = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
+                string senderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+
+                MailMessage mailMassage = new MailMessage(senderEmail, toEmail, subject, emailBody);
+                mailMassage.IsBodyHtml = true;
+
+                client.Send(mailMassage);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
 
     }
 }

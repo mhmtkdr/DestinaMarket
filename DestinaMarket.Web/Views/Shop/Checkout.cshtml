@@ -18,9 +18,11 @@
                             <li class="list-group-item d-flex justify-content-between lh-condensed" data-id="@product.ID">
                                 <div>
                                     <h6 class="my-0">@i - @product.Name - Adet: @productQuantity</h6>
+                                    <img src="@product.ImageURL" alt="image" style="height : 100px">
                                     <small class="text-muted">@(product.Description.Length > 100 ? product.Description.Substring(0, 99) : product.Description)</small>
                                 </div>
                                 <span class="text-muted">Birim Fiyat: ₺ @product.Price - Toplam Fiyat: @(productQuantity * product.Price)</span>
+                                <button class="deleteBtn" data-id="@product.ID">Sil</button>
                             </li>
 
                             i++;
@@ -52,8 +54,17 @@
                             <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" value="@Model.User.Address">
                         </div>
 
-                        <hr class="mb-4">
-                        <button id="placeOrderBtn" class="btn btn-primary btn-lg btn-block" type="button">Sipariş Ver!</button>
+                        <div class="input-group">
+                            <div class="radio form-control">
+                                <label><input name="payment" type="radio" value="Cash" /> Kapıda Ödeme</label>
+                            </div>
+                            <div class="radio form-control">
+                                <label><input name="payment" type="radio" value="Cart" /> Kart ile Ödeme</label>
+                            </div>
+                        </div>
+                        @*<a class="btn btn-danger" onclick="SendEmail()"> Mail ile bilgilendir</a>*@
+                        <hr class="mb-4"> 
+                        <button id="placeOrderBtn" class="btn btn-primary btn-lg btn-block" type="button" onclick="SendEmail()">Sipariş Ver!</button>
                     </form>
                 </div>
             </div>
@@ -73,7 +84,8 @@
         	if(response.Success)
         	{
         		$.cookie('CartProducts', '', { path: '/' });
-        		updateCartProducts();
+                updateCartProducts();
+                
 
         		swal("Bitti", "Siparişin Verildi.", "success").then((value) => {
         			window.location = '@Url.Action("Index", "Shop")';
@@ -87,11 +99,63 @@
         	alert("FAIL");
         });
 	});
+
+        $(".deleteBtn").click(function () {
+        swal({
+            title: "Onay?",
+            text: "Bu Ürünü Silmeyi İstiyor Musunuz?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("Delete", "Shop")',
+                        data: {
+                            ID: $(this).attr('data-id')
+                        }
+                    })
+                        .done(function (response) {
+                            $("#tableContiner").html(response);
+
+                            swal("Başarıyla Silindi.", {
+                                icon: "success",
+                            });
+                        })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("Fail");
+                        });
+                }
+            });
+        });
+
+
+        var SendEmail = function () {
+
+            $.ajax({
+                type: "Post",
+                url: "/Shop/SendMailToUser",
+                success: function (data) {
+                    if (data == true) {
+                        alert("Success");
+                    }
+                    else {
+                        alert("Fail");
+                    }
+
+                }
+
+            })
+        };
     </script>
 }
 else
 {
     <div>
-        <b>Sepetin Boş!</b>
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Sepetin Boş</span>
+        </h4>
     </div>
 }

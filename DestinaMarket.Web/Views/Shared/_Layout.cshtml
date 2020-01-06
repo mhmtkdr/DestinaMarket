@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,7 @@
                 <div class="container-fluid clearfix container-width-93" id="site-header-inner">
                     <div id="logo" class="logo float-left">
                         <a href="@Url.Action("Index", "Home")" title="logo">
-                            <img src="~/Content/images/DestinaMarket.png" alt="image" width="107" height="24" data-retina="images/DestinaMarket.png" data-width="107" data-height="24">
+                            <img src="~/Content/images/DestinaMarket1.png" alt="image" width="214" height="48" data-retina="content/images/DestinaMarket1.png" data-width="214" data-height="48">
                         </a>
                     </div><!-- /.logo -->
                     <div class="mobile-button"><span></span></div>
@@ -63,14 +64,14 @@
                                 <button type="submit" class="header-search-submit" title="Search">Ara</button>
                             </form>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @*@if (User.Identity.IsAuthenticated)
                         {
                             <li class="box-login">
                                 <a class="icon_login" href="#">
                                     @User.Identity.Name
                                 </a>
                             </li>
-                        }
+                        }*@
 
                         <li class="box-cart nav-top-cart-wrapper">
                             <a class="icon_cart nav-cart-trigger active" href="@Url.Action("Checkout", "Shop")"><span id="cartProductsCount">0</span></a>
@@ -82,10 +83,36 @@
                                 <div class="widget_shopping_cart_content">
                                     <div class="woocommerce-min-cart-wrap">
                                         <ul class="menu">
+                                            @*<li>
+            <a href="/">@User.Identity.Name</a>
+        </li>*@
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                    <li><a href="@Url.Action("AdminPanel", "Home")">İşlemler</a></li>
+                                            }
                                             <li>
-                                                <a href="/">@User.Identity.Name</a>
+                                                @if (Request.IsAuthenticated)
+                                                {
+                                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+
+                                                        <ul class="nav navbar-nav navbar-right">
+                                                            <li>
+                                                                @Html.ActionLink("Merhaba " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                                            </li>
+                                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Oturumu kapat</a></li>
+                                                        </ul>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <ul class="nav navbar-nav navbar-right">
+                                                        <li>@Html.ActionLink("Kaydol", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                                                        <li>@Html.ActionLink("Oturum aç", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                                    </ul>
+                                                }
                                             </li>
-                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Oturumu kapat</a></li>
                                         </ul>
                                     </div><!-- /.widget_shopping_cart_content -->
                                 </div>
@@ -98,6 +125,17 @@
                             <ul class="menu">
                                 <li>
                                     <a href="@Url.Action("Index", "Home")">Ana Menü</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Shop")">Kategoriler</a>
+                                    <ul class="submenu">
+                                        <li><a href="@Url.Action("Index", "Shop")">Telefonlar</a></li>
+                                        <li><a href="@Url.Action("Index", "Shop")">Bilgisayarlar</a></li>
+                                        <li><a href="@Url.Action("Index", "Shop")">Televizyonlar</a></li>
+                                        <li><a href="@Url.Action("Index", "Shop")">Kameralar</a></li>
+                                        <li><a href="@Url.Action("Index", "Shop")">Aksesuarlar</a></li>
+                                        <li><a href="@Url.Action("Index", "Shop")">Ev Aletleri</a></li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Index", "Shop")">Ürünler</a>

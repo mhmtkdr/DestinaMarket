@@ -11,6 +11,7 @@ namespace DestinaMarket.Web.Models
     {
         public string Name { get; set; }
         public string Address { get; set; }
+        public string UserRole { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

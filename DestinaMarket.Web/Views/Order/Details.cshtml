@@ -16,9 +16,10 @@
                             <li class="list-group-item d-flex justify-content-between lh-condensed" data-id="@orderItem.ID">
                                 <div>
                                     <h6 class="my-0">@i - @orderItem.Product.Name - Adet: @orderItem.Quantity</h6>
+                                    <img src="@orderItem.Product.ImageURL" alt="image" style="height : 100px">
                                     <small class="text-muted">@(orderItem.Product.Description.Length > 100 ? orderItem.Product.Description.Substring(0, 99) : orderItem.Product.Description)</small>
                                 </div>
-                                <span class="text-muted">Tek Adet: $ @orderItem.Product.Price - Toplam: @(orderItem.Quantity * orderItem.Product.Price)</span>
+                                <span class="text-muted">Tek Adet: ₺ @orderItem.Product.Price - Toplam: ₺ @(orderItem.Quantity * orderItem.Product.Price)</span>
                             </li>
 
                             i++;

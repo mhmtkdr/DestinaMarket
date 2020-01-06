@@ -33,5 +33,10 @@ namespace DestinaMarket.Web.Controllers
 
             return View();
         }
+        [Authorize(Users ="mkadirkuzucu@gmail.com")]
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
     }
 }

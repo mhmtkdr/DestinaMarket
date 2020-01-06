@@ -66,7 +66,7 @@ namespace DestinaMarket.Web.Controllers
                 model.OrderBy = UserManager.FindById(model.Order.UserID);
             }
 
-            model.AvailableStatuses = new List<string>() { "Pending", "In Progress", "Delivered" };
+            model.AvailableStatuses = new List<string>() { "Bekliyor", "Kargoya Verildi", "Ulaştırıldı" };
 
             return View(model);
         }

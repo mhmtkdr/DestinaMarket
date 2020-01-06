@@ -36,5 +36,16 @@ namespace DestinaMarket.Services
                 return context.SaveChanges();
             }
         }
+
+        public void DeleteOrder(int ProductID)
+        {
+            using (var context = new DMContext())
+            {
+                var orderItem = context.OrderItems.Find(ProductID);
+
+                context.OrderItems.Remove(orderItem);
+                context.SaveChanges();
+            }
+        }
     }
 }

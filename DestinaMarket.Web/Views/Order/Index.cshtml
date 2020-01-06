@@ -51,6 +51,7 @@
                             <th class="font-weight-bold">Kullanıcı ID</th>
                             <th class="font-weight-bold">Toplam Ücret</th>
                             <th class="font-weight-bold">Statü</th>
+                            <th class="font-weight-bold">Tarih</th>
                             <th class="font-weight-bold wrap-td">Eylemler</th>
                         </tr>
                     </thead>
@@ -66,6 +67,7 @@
                                         @order.TotalAmount .00₺
                                     </td>
                                     <td>@order.Status</td>
+                                    <td>@order.OrderedAt</td>
                                     <td class="wrap-td">
                                         <a class="detailBtn" data-id="@order.ID" href="@Url.Action("Details", "Order", new { ID = order.ID })">Detaylar</a>
                                     </td>

@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using DestinaMarket.Web.Models;
 using System.Net.Mail;
+using System.Net;
 
 namespace DestinaMarket.Web
 {
@@ -21,6 +22,12 @@ namespace DestinaMarket.Web
         {
             // E-posta göndermek için e-posta hizmetinizi buraya bağlayın.
             SmtpClient client = new SmtpClient();
+            //client.Host = "smtp.gmail.com";
+            //client.Port = 110;
+            //client.EnableSsl = true;
+            //NetworkCredential nc = new NetworkCredential("destinamarket@gmail.com", "marketdestina1234");
+            // client.Credentials
+            //client.Port
             return client.SendMailAsync("email from web.config here",
                                         message.Destination,
                                         message.Subject,

@@ -69,6 +69,10 @@ namespace DestinaMarket.Web.Models
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Rol")]
+        public string UserRole { get; set; }
+
+        [Required]
         [Display(Name = "Adres")]
         public string Address { get; set; }
 
